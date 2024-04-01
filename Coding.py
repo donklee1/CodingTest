@@ -1,43 +1,28 @@
 # Coding.py
 #import Library as Lib
-# 28279 S4
-from sys import stdin
-from collections import deque
-DEQ = deque()
-N = int(stdin.readline().rstrip())
-for _ in range(N):
-    cmd = list(stdin.readline().split())
-    if cmd[0] == "1": #앞에 추가
-        DEQ.appendleft(int(cmd[1]))
-    elif  cmd[0] == "2": #뒤에 추가
-        DEQ.append(int(cmd[1]))
-    elif cmd[0] == "3": #맨앞출력
-        if len(DEQ) > 0:
-            v = DEQ.popleft()
-            print(v)
-        else:
-            print(-1)
-    elif cmd[0] == "4": # 맨뒤출력
-        if len(DEQ) > 0:
-            v = DEQ.pop()
-            print(v)
-        else:
-            print(-1)
-    elif cmd[0] == "5": # 개수
-        print(len(DEQ))
-    elif cmd[0] == "6": # 비어있는지
-        if len(DEQ) == 0:
-            print(1)
-        else:
-            print(-1)
-    elif cmd[0] == "7": #맨앞의 정수
-        if len(DEQ) > 0:
-            print(DEQ[0])
-        else:
-            print(-1)
-    elif cmd[0] == "8": # 맨뒤의 정수
-        if len(DEQ) > 0:
-            print(DEQ[-1])
-        else:
-            print(-1)
+# 4134 S4
 
+def IsPrime(N):
+    if N < 2:
+        return False
+    elif N == 2:
+        return True
+    if N % 2 == 0:
+        return False
+    LastVal = (int)(N ** (1/2))
+    for denom in range(3,LastVal, 2):
+        if N % denom == 0:
+            return False
+    return True
+
+T = int(input())
+for _ in range(T):
+    N = int(input())
+    while True:
+        if (IsPrime(N) == True):
+            print(N)
+            break
+        N = N + 1
+
+
+            

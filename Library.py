@@ -68,3 +68,19 @@ class Trie:
                 break
 
         return words         
+
+# ----- 행렬곱 -----
+def MatMul(A, B):
+    rows = len(A)
+    cols = len(B[0])
+    inner = len(A[0])
+    C = [[0] * cols for _ in range(rows)]
+    for a in range(rows):
+        for b in range(cols):
+            sum = 0
+            for k in range(inner):
+                sum += A[a][k] * B[k][b]
+            C[a][b] = sum
+    return C                
+
+
