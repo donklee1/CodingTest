@@ -9,7 +9,7 @@ def IsPrime(N):
         return True
     if N % 2 == 0:
         return False
-    LastVal = (int)(N ** (1/2))
+    LastVal = (int)(N ** (1/2)) + 1
     for denom in range(3,LastVal, 2):
         if N % denom == 0:
             return False
