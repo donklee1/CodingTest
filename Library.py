@@ -1,5 +1,10 @@
 # Library.py
 
+# list = [] .append(x) .remove(x) .pop()/.pop(0)
+# dict = {} d[k]=v     del d[k]
+# queue
+# deque     .append(x) .popleft()  -- 양방항 꺼냄
+# ---------- Linked List -------------------------
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
