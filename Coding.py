@@ -2,27 +2,24 @@
 #import Library as Lib
 # 4134 S4
 
-def IsPrime(N):
-    if N < 2:
-        return False
-    elif N == 2:
-        return True
-    if N % 2 == 0:
-        return False
-    LastVal = (int)(N ** (1/2)) + 1
-    for denom in range(3,LastVal, 2):
-        if N % denom == 0:
-            return False
-    return True
+N, M = map(int, input().split())
+#N, M = map(int, "4 2".split())
 
-T = int(input())
-for _ in range(T):
-    N = int(input())
-    while True:
-        if (IsPrime(N) == True):
-            print(N)
-            break
-        N = N + 1
+TESTSET = []
 
+def DFS():
+    if len(TESTSET) == M: # 정답조건
+        for A in TESTSET:
+            print(A, end=' ')
+        print("")
+        return
+
+    for i in range(1, N+1):
+        if len(TESTSET) == 0 or i >= TESTSET[-1]:
+            TESTSET.append(i)
+            DFS()
+            TESTSET.pop()
+
+DFS()
 
             

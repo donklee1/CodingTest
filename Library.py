@@ -69,6 +69,20 @@ class Trie:
 
         return words         
 
+# ----- 소수판정 -----
+def IsPrime(N):
+    if N < 2:
+        return False
+    elif N == 2:
+        return True
+    if N % 2 == 0:
+        return False
+    LastVal = (int)(N ** (1/2)) + 1
+    for denom in range(3,LastVal, 2):
+        if N % denom == 0:
+            return False
+    return True
+
 # ----- 행렬곱 -----
 def MatMul(A, B):
     rows = len(A)
@@ -82,5 +96,3 @@ def MatMul(A, B):
                 sum += A[a][k] * B[k][b]
             C[a][b] = sum
     return C                
-
-
