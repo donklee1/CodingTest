@@ -24,7 +24,7 @@ def DFS1(N, M):
 #  DFS2 : 스택미사용, 행과열 루프
 #  <9663 G4> N-Queen (결과-개수)
 # 행,열에 대한 루프를 진행 (열은 내부 for/ 행은 DFS 인수)
-def DFS2(N, row): # ---- 스택 미사용 경우: 항목출력요구 ---
+def DFS2(N, row): # ---- 스택 미사용 경우 ---
     # 모든항목 조건만족 경우
     if row == N:
         # 처리
@@ -47,5 +47,14 @@ def DFS3(count, MAX):
             # 데이터를 체크 (push와 같은 기능)
             DFS2(count+1, MAX) # 다음행에 대한 진행
             # 데이터를 언체크 (pop와 같은 기능)
+
+# DFS4 : 중복을 허용하지 않는 조합에 대하여 각항목의 포함여부 테크닉
+DATA = list(map(int,input().split()))
+def DFS4(index, SUM):
+    # 조건만족 판단
+
+	DFS4(index+1, SUM)              # 해당윈소를 사용하는 경우
+	DFS4(index+1, SUM-DATA[index])  # 해당윈소를 사용하지 않는 경우
+
 
 # ----- 2. DP -----

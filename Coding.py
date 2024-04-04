@@ -1,25 +1,30 @@
-# Coding.py
-#import Library as Lib
-# 4134 S4
+# 15663 S2
+from sys import stdin
+import itertools
 
 N, M = map(int, input().split())
-#N, M = map(int, "4 2".split())
+DATA = list(map(int, input().split()))
+DATA.sort()
+USE_FLAG = [False] * N
+RESULT = []
+FINAL_RESULT = []
 
-TESTSET = []
-
-def DFS():
-    if len(TESTSET) == M: # 정답조건
-        for A in TESTSET:
-            print(A, end=' ')
+def dfs(start):
+    global N, M
+    if (start > N):
+        return
+    if len(RESULT) == M:
+        for a in RESULT:
+            print(a, end=" ")
         print("")
         return
+    
+    for i in range(N):
+        if USE_FLAG[i] == False:
+            RESULT.append(DATA[i])
+            USE_FLAG[i] = True
+            dfs(i+1)
+            RESULT.pop()
+            USE_FLAG[i] = False
 
-    for i in range(1, N+1):
-        if len(TESTSET) == 0 or i >= TESTSET[-1]:
-            TESTSET.append(i)
-            DFS()
-            TESTSET.pop()
-
-DFS()
-
-            
+dfs(0)
