@@ -1,30 +1,20 @@
-# 15663 S2
+# 1759 G5
 from sys import stdin
 import itertools
 
-N, M = map(int, input().split())
-DATA = list(map(int, input().split()))
+L, C = map(int, input().split())
+DATA = list(input().split())
 DATA.sort()
-USE_FLAG = [False] * N
-RESULT = []
-FINAL_RESULT = []
 
-def dfs(start):
-    global N, M
-    if (start > N):
-        return
-    if len(RESULT) == M:
-        for a in RESULT:
-            print(a, end=" ")
-        print("")
-        return
+COMB = itertools.combinations(DATA, L)
+for psw in COMB:
+    mo_count = 0
+    ja_count = 0
+    for al in psw:
+        if al in "aeiou":
+            mo_count += 1
+        else:
+            ja_count += 1
     
-    for i in range(N):
-        if USE_FLAG[i] == False:
-            RESULT.append(DATA[i])
-            USE_FLAG[i] = True
-            dfs(i+1)
-            RESULT.pop()
-            USE_FLAG[i] = False
-
-dfs(0)
+    if mo_count >= 1 and ja_count >= 2:
+        print(*list(psw))
