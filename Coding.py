@@ -7,13 +7,30 @@ for i in range(2, N+1): # 상향식 DP
     min_op_count[i] = min_op_count[i-1] + 1 # -1연산적용
 
     if (i % 3) == 0:
-        min_op_count[i] = min(min_op_count[i], min_op_count[i // 3] + 1)
-        operator = 1
+        prev = min_op_count[i // 3] + 1
+        if prev < min_op_count[i]:
+            operator = 1
+        min_op_count[i] = min(min_op_count[i], prev)
     if (i % 2) == 0:
-        min_op_count[i] = min(min_op_count[i], min_op_count[i // 2] + 1)
-        operator = 2
+        prev = min_op_count[i // 2] + 1
+        if prev < min_op_count[i]:
+            operator = 2
+        min_op_count[i] = min(min_op_count[i], prev)
     op_list.append(operator)
 
-print(min_op_count)
 print(min_op_count[N])
-print(op_list)
+index = 2
+print(N, end=" ")
+while True: # 연산자를 역추적하여 최소화 과정출력
+    if op_list[index] == 3:
+        N = N - 1
+        index += 1
+    elif op_list[index] == 2:
+        N = N // 2
+        index *= 2
+    elif op_list[index] == 1:
+        N = N // 3
+        index *= 3
+    print(N, end=" ")
+    if (N == 1):
+        break
