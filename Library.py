@@ -4,6 +4,7 @@
 # dict = {} d[k]=v     del d[k]
 # queue
 # deque     .append(x) .popleft()  -- 양방항 꺼냄
+# heapq     heapq.heappush(heap,x) heapq.heappop(heap)
 # ---------- Linked List -------------------------
 class ListNode:
     def __init__(self, val=0, next=None):

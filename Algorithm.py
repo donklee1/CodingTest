@@ -1,4 +1,5 @@
 # Algorithm.py
+# 랜덤추천문제 : https://devjeong.com/algorithm/algorithm-1/
 
 # ----- 1. DFS -----
 #
