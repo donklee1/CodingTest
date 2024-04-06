@@ -1,10 +1,13 @@
 # Library.py
-
+#        생성 삽입      삭제
 # list = [] .append(x) .remove(x) .pop()/.pop(0)
+# tuple= ()
 # dict = {} d[k]=v     del d[k]
+# set  = {} .add(x)    .remove(x)
 # queue
 # deque     .append(x) .popleft()  -- 양방항 꺼냄
-# heapq     heapq.heappush(heap,x) heapq.heappop(heap)
+# heapq = []   heapq.heappush(heap,x) heapq.heappop(heap)
+#         최소값 heap[0], 최대값 heap[-1]
 # ---------- Linked List -------------------------
 class ListNode:
     def __init__(self, val=0, next=None):
