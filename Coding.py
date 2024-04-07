@@ -1,20 +1,32 @@
-# 20365 s3
+# 11723 s5
 from sys import stdin
 
-N = int(stdin.readline().rstrip())
-S = list(stdin.readline().rstrip())
-
-def CheckCount(BaseColor, TargetColor):
-    count = 0
-    for i in range(0, N):
-        if (i == 0):
-            if (S[0] != BaseColor):
-                count += 1
-        elif (S[i] == TargetColor) and S[i] != S[i-1]: # 연속된 경우 무시
-            count += 1
-    return count
-
-C1 = CheckCount("B", "R")
-C2 = CheckCount("R", "B")
-
-print(1 + min(C1, C2))
+DATA = set()
+M = int(stdin.readline().rstrip())
+for _ in range(M):
+    cmd = list(stdin.readline().split())
+    if cmd[0] == "add":
+        param = int(cmd[1])
+        DATA.add(param)
+    elif cmd[0] == "remove":
+        param = int(cmd[1])
+        if (param in DATA) == True:
+            DATA.remove(param)
+    elif cmd[0] == "check":
+        param = int(cmd[1])
+        if (param in DATA) == True:
+            print(1)
+        else:
+            print(0)
+    elif cmd[0] == "toggle":
+        param = int(cmd[1])
+        if (param in DATA) == True:
+            DATA.remove(param)
+        else:
+            DATA.add(param)
+    elif cmd[0] == "all":
+        DATA.clear()
+        for i in range(1, 21, 1):
+             DATA.add(i)
+    elif cmd[0] == "empty":
+        DATA.clear()
