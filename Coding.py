@@ -20,7 +20,7 @@ for i in range(1, count):
         ONE_COUNT[i] = ONE_COUNT[i-1] + 1
     if (i >= 2) and ((DP_MAXVAL[i-2]) + STEP[i] > max_val):
         max_val = DP_MAXVAL[i-2] + STEP[i]
-        ONE_COUNT[i] = 0
+        ONE_COUNT[i] = 1 # 주의: 첫번째 밟음
     DP_MAXVAL[i] = max_val
     print("i=", i, "ONE=", ONE_COUNT, "DP=", DP_MAXVAL)
     
