@@ -9,10 +9,68 @@
 # heapq = []    heapq.heappush(heap,x) heapq.heappop(heap)
 #         최소값 heap[0], 최대값 heap[-1]
 # ---------- Linked List -------------------------
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
+class SNode:
+    def __init__(self, data, next = None):
+        self.data = data
         self.next = next
+
+class DNode:
+    def __init__(self, data = None, prev = None, next = None):
+        self.data = data
+        self.prev = prev
+        self.next = next
+
+class DLink:
+    def __init__(self):
+        self.head = DNode("")
+        self.tail = DNode("")
+        self.size = 0
+    
+    def append(self, data):
+        node = DNode(data)
+        if self.size == 0:
+            self.head.next = node
+            self.tail.prev = node
+            node.prev = self.head
+            node.next = self.tail
+            self.size = 1
+        else:
+            last_node = self.tail.prev
+            self.tail.prev = node
+            node.prev = last_node
+            node.next = self.tail
+            last_node.next = node
+            self.size += 1
+
+    def insert(self, node2, data):
+        if node2 == self.tail:
+            self.append(data)
+        else: # node1 <-> new_node <-> node2
+            new_node = DNode(data)
+            node1 = node2.prev
+            node1.next = new_node
+            new_node.prev = node1
+            node2.prev = new_node
+            new_node.next = node2
+
+    def delete(self, node):
+        if node != self.head:
+            node1 = node.prev
+            node2 = node.next
+            node1.next = node2
+            node2.prev = node1
+
+    def get_data(self, node):
+        return node.data
+
+    def printList(self, delimeter = ' '):
+        if self.size == 0:
+            return
+        p = self.head.next
+        while p != self.tail:
+            print(p.data, end = delimeter)
+            p = p.next
+        print("")
 
 # ---------- Trie -------------------------------
 class Node(object):

@@ -1,52 +1,83 @@
 # 1406 S2 에디터
 from sys import stdin
 
-class ListNode:
-    def __init__(self, val=0, prev=None,next=None):
-        self.val = val
+class DNode:
+    def __init__(self, data = None, prev = None, next = None):
+        self.data = data
         self.prev = prev
         self.next = next
 
-def PrintNode(node):
-    while node:
-        print(node.val, end="")
-        node = node.next
-    print("")
+class DLink:
+    def __init__(self):
+        self.head = DNode("")
+        self.tail = DNode("")
+        self.size = 0
+    
+    def append(self, data):
+        node = DNode(data)
+        if self.size == 0:
+            self.head.next = node
+            self.tail.prev = node
+            node.prev = self.head
+            node.next = self.tail
+            self.size = 1
+        else:
+            last_node = self.tail.prev
+            self.tail.prev = node
+            node.prev = last_node
+            node.next = self.tail
+            last_node.next = node
+            self.size += 1
 
-S = list(stdin.readline())
-command_count = int(stdin.readline().rstrip())
+    def insert(self, node2, data):
+        if node2 == self.tail:
+            self.append(data)
+        else: # node1 <-> new_node <-> node2
+            new_node = DNode(data)
+            node1 = node2.prev
+            node1.next = new_node
+            new_node.prev = node1
+            node2.prev = new_node
+            new_node.next = node2
 
-head_node = ListNode(S[0])
-curr_node = head_node
-for i in range(1, len(S)):
-    new_node = ListNode(S[i])
-    curr_node.next = new_node
-    new_node.prev = curr_node
-    curr_node = curr_node.next
+    def delete(self, node):
+        if node != self.head:
+            node1 = node.prev
+            node2 = node.next
+            node1.next = node2
+            node2.prev = node1
 
-PrintNode(head_node)
+    def get_data(self, node):
+        return node.data
 
-for _ in range(command_count):
-    CMD_LIST = stdin.readline().split()
-    if CMD_LIST[0] == "L": # 커서 <-- 이동
-        if curr_node.prev != None:
-            curr_node = curr_node.prev
-    elif CMD_LIST[0] == "D": # 커서 --> 이동
-        if curr_node.next != None:
-            curr_node = curr_node.next
-    elif CMD_LIST[0] == "B": # 커서왼쪽 삭제
-        if curr_node.prev != None:
-            prev_node = curr_node.prev
-            next_node = curr_node.next
-            
-            #curr_node.prev = curr_node.prev.prev
-    elif CMD_LIST[0] == "P": # 삽입
-        new_node = ListNode(CMD_LIST[1], curr_node.prev, curr_node)
-        prev = new_node.prev
-        if prev != None:
-            prev.next = new_node
-        curr_node.prev = new_node
+    def printList(self, delimeter = ' '):
+        if self.size == 0:
+            return
+        p = self.head.next
+        while p != self.tail:
+            print(p.data, end = delimeter)
+            p = p.next
+        print("")
 
-print(head_node)
-PrintNode(head_node)
+S = list(stdin.readline().rstrip())
+LL = DLink()
+for c in S:
+    LL.append(c)
+
+N = int(stdin.readline().rstrip())
+cursor = LL.tail
+for _ in range(N):
+    CMD = list(stdin.readline().split())
+    if CMD[0] == "L":
+        if cursor.prev != LL.head:
+            cursor = cursor.prev
+    elif CMD[0] == "D":
+        if cursor != LL.tail:
+            cursor = cursor.next
+    elif CMD[0] == "B":
+        LL.delete(cursor.prev)
+    elif CMD[0] == "P":
+        LL.insert(cursor, CMD[1])
+
+LL.printList('')
 
