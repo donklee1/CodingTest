@@ -52,6 +52,7 @@ class DLink:
             new_node.prev = node1
             node2.prev = new_node
             new_node.next = node2
+            self.size += 1
 
     def delete(self, node):
         if node != self.head:
@@ -59,6 +60,7 @@ class DLink:
             node2 = node.next
             node1.next = node2
             node2.prev = node1
+            self.size -= 1
 
     def get_data(self, node):
         return node.data
