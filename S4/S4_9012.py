@@ -1,6 +1,7 @@
+# S4_9012 올바른 괄호문자열
 N = int(input())
 for _ in range(N):
-    S = input()
+    S = input() # (,) 로만 이루어짐
     LIST = list(S)
     STACK = []
     RESULT = True
@@ -12,10 +13,8 @@ for _ in range(N):
                 STACK.pop()
             else:
                 RESULT = False
-                break
-    if RESULT == False:
-        print("NO")
-    elif len(STACK) == 0:
+                break                
+    if len(STACK) == 0 and RESULT == True:
         print("YES")
     else:
         print("NO")    

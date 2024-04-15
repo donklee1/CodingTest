@@ -1,4 +1,4 @@
-# 3986 S4 좋은단어
+# 3986 S4 좋은단어 (A,B로만 이루어짐)
 from sys import stdin
 
 N = int(input())
@@ -11,7 +11,7 @@ for _ in range(N):
         if len(STACK) == 0:
             STACK.append(char)
         else:
-            if char == STACK[-1]: # 스택과 동일한 경우
+            if char == STACK[-1]: # 스택과 동일한 경우 (대칭)
                 STACK.pop()
             else:
                 STACK.append(char)

@@ -1,6 +1,6 @@
+# S4_14425 단순한 집합문제
 N, M = map(int, input().split())       
-SET_N = {""}
-SET_N.remove("") # 좋은방법 아님 (문자열 타입때문)
+SET_N = set()
 for _ in range(N):
     A = input()
     SET_N.add(A)

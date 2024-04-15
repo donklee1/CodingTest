@@ -1,6 +1,4 @@
-# Coding.py
-#import Library as Lib
-# 18258 S4
+# 18258 S4  deque 사용연습
 from sys import stdin
 from collections import deque
 Q = deque()

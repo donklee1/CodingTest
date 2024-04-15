@@ -2,7 +2,7 @@
 from sys import stdin
 
 site_count, qurey_count = map(int, stdin.readline().split())
-SITE = {}
+SITE = {} # dict 
 
 for _ in range(site_count):
     site, password = stdin.readline().split()
