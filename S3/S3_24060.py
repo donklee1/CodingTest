@@ -1,4 +1,4 @@
-# 24060
+# S3_24060 merge_sort
 from sys import stdin
 
 k_count = 0
@@ -49,8 +49,6 @@ def merge_sort(A, p, r): # A[p..r]을 오름차순 정렬한다.
 
 N, K = map(int, input().split())
 L = list(map(int, input().split()))
-#N, K = map(int, "5 13".split())
-#L = list(map(int, "4 5 1 3 2".split()))
 tmp = [0 for _ in range(N)]
 merge_sort(L, 0, len(L)-1)
 print(k_val)

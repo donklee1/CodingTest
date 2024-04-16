@@ -1,8 +1,8 @@
-# 20920
+# S3_20920 단어정렬
 from sys import stdin
 N, M = map(int, input().split()) # 단어개수, 기준단어 길이
 
-DICT_WORD = {}
+DICT_WORD = {} # 키:워드, 값=[빈도, 길이, 단어]
 for _ in range(N):
     WORD = stdin.readline().rstrip()
     if len(WORD) < M:

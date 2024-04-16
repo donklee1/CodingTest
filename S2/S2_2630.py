@@ -1,27 +1,12 @@
 # 2630 분할정복
 from sys import stdin
-# 신기법 적용: 샘플 자동입력 --> 실전변환 (매번 입력할 필요없음)
-DATA = ["1 1 0 0 0 0 1 1",
-        "1 1 0 0 0 0 1 1",
-        "0 0 0 0 1 1 0 0",
-        "0 0 0 0 1 1 0 0",
-        "1 0 0 0 1 1 1 1",
-        "0 1 0 0 1 1 1 1",
-        "0 0 1 1 1 1 1 1",
-        "0 0 1 1 1 1 1 1"
-        ]
-#N = 8
 N = int(input())
 MAT = [[0] * N for i in range(N)]
 for i in range(N):
-    #MAT[i] = list(map(int, DATA[i].split()))
     MAT[i] = list(map(int, stdin.readline().split()))
-
-#print(MAT)
 
 COUNT = [0] * 2 # White, Blue Count
 def Work(MAT, START_X, START_Y, LEN):
-    #print("START_X=", START_X, "START_Y=", START_Y, "LEN=", LEN)
     global COUNT
     # 영역이 모두 같은색인가 ?
     same = True
