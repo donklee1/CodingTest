@@ -1,4 +1,4 @@
-# S2_15663 M과 N(9) 1~N 사이의 숫자에서 M개를 모두툴력
+# S2_15663 M과 N(9) 1~N M개, 이전 동일숫자 불가, 사전순
 from sys import stdin
 import itertools
 

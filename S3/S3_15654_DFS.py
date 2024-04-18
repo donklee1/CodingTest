@@ -1,12 +1,9 @@
-# 15654 S3
-
+# S3_15654 중복없음, 사전순
 RESULT = []
 
 def DFS(DATA):
     if len(RESULT) == M: # 정답조건
-        for A in RESULT:
-            print(A, end=' ')
-        print("")
+        print(*RESULT)
         return
 
     for v in DATA:
@@ -17,5 +14,5 @@ def DFS(DATA):
 
 N, M = map(int, input().split())
 DATA = list(map(int, input().split()))
-DATA.sort()
+DATA.sort() # 사전순, 미리정렬
 DFS(DATA)
