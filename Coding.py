@@ -1,27 +1,32 @@
-# S2-11725
+# S1-1991 이진트리 탐색
 from sys import stdin
-import sys
-sys.setrecursionlimit(100000)
+tree = dict() # 딕셔너리 사용!!
+count = int(input())
+for i in range(count):
+    root, left, right = input().split()
+    tree[root] = left,right # tuple과 동일 (left, right)
 
-N = int(stdin.readline().rstrip())
-GRAPH = [[] for _ in range(N+1)] # 비어있는 2차원
-P_NODE = [] # dict 방식은 메모리 낭비
-Visited = [False] * (N+1)
-for _ in range(N-1):
-    n1, n2 = map(int, stdin.readline().split())
-    GRAPH[n1].append(n2) #인접리스트 방식
-    GRAPH[n2].append(n1) #인접리스트 방식
- 
-def def_findParent(p_node):
-    Visited[p_node] = True
-    for node in GRAPH[p_node]:
-        if Visited[node] == False:
-            Visited[node] = True
-            P_NODE.append((node, p_node))
-            def_findParent(node)
+def pre_order(data): # 성공
+    if data != ".":
+        print(data, end="")
+        pre_order(tree[data][0]) #튜플 첫항 액세스 방법
+        pre_order(tree[data][1]) #튜플 두번째 액세스 방법
 
-def_findParent(1)
-P_NODE.sort(key = lambda x: x[0])
-print(P_NODE)
-for child, parent in P_NODE:
-    print(parent)
+def in_order(data):
+    if data != ".":
+        left, right = tree[data]
+        in_order(left)
+        print(data, end="")
+        in_order(right)
+
+def post_order(data):
+    if data != ".":
+        post_order(tree[data][0])
+        post_order(tree[data][1])
+        print(data, end="")
+
+pre_order("A")
+print("")
+in_order("A")
+print("")
+post_order("A")
