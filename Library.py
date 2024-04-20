@@ -159,4 +159,63 @@ def MatMul(A, B):
             for k in range(inner):
                 sum += A[a][k] * B[k][b]
             C[a][b] = sum
-    return C                
+    return C
+
+# ----- 다익스트라 : 최소경로 -----
+graph = {  # dict() of dict()
+    'A': {'B': 8, 'C': 1, 'D': 2},
+    'B': {},
+    'C': {'B': 5, 'D': 2},
+    'D': {'E': 3, 'F': 5},
+    'E': {'F': 1},
+    'F': {'A': 5}
+}
+import heapq
+def dijkstra1(graph, start): # dict() of dict() 사용버젼
+  dist_list = [int(1e9)] * len(graph)  # 처음 초기값은 무한대
+  dist_list[start] = 0  # 시작 값은 0이어야 함
+  queue = []
+  heapq.heappush(queue, [dist_list[start], start])  # 시작 노드부터 탐색 시작 하기 위함.
+
+  while queue:  # queue에 남아 있는 노드가 없으면 끝
+    dist, node = heapq.heappop(queue)  # 탐색 할 노드, 거리를 가져옴.
+
+    if dist_list[node] < dist:  # 기존에 있는 거리보다 길다면, 볼 필요도 없음
+      continue
+    
+    for next_node, next_dist in graph[node].items():
+      distance = dist + next_dist  # 해당 노드를 거쳐 갈 때 거리
+      if distance < dist_list[next_node]:  # 알고 있는 거리 보다 작으면 갱신
+        dist_list[next_node] = distance
+        heapq.heappush(queue, [distance, next_node])  # 다음 인접 거리를 계산 하기 위해 큐에 삽입
+  return dist_list
+
+  return distance_state
+  # {'A': 0, 'B': 6, 'C': 1, 'D': 2, 'E': 5, 'F': 6}
+  # call --> dijkstra(graph, 'A')
+
+graph2 = [  # list of list
+    [('B', 8), ('C', 1), ('D', 2)],
+    [],
+    [ ('B', 5), ('D', 2)],
+    [ ('E', 3), ('F', 5)],
+    [ ('F', 1)],
+    [ ('A', 5)]
+]
+
+def dijkstra2(graph, start): # list of list (노드가 숫자인 경우만 가능)
+    dist_list = [int(1e9)] * len(graph)  # 처음 초기값은 무한대
+    dist_list[start] = 0  # 시작 노드까지의 거리는 0
+    queue = []
+    heapq.heappush(queue, [dist_list[start], start])  # 시작 노드부터 탐색 시작
+
+    while queue:  # queue에 남아있는 노드가 없을 때까지 탐색
+        dist, node = heapq.heappop(queue)  # 탐색할 노드, 거리
+        if dist_list[node] < dist: # 기존 최단거리보다 멀다면 무시
+            continue
+        for next_node, next_dist in graph[node]:
+            distance = dist + next_dist  # 인접노드까지의 거리
+            if distance < dist_list[next_node]:  # 기존 거리 보다 짧으면 갱신
+                dist_list[next_node] = distance
+                heapq.heappush(queue, [distance, next_node])  # 다음 인접 거리를 계산 하기 위해 큐에 삽입
+    return dist_list
