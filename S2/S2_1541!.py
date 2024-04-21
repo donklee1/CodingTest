@@ -15,6 +15,5 @@ for idx, sub in enumerate(S2):
         
 result = int(S2[0])
 for i in range(1, len(S2)):
-    result -= S2[i]
-print("S2=", S2, result)
-
+    result -= int(S2[i])
+print(result)
