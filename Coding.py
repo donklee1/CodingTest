@@ -1,34 +1,34 @@
-# S1_1389 케빈베이컨
+# S1_2718 미로탐색
 from sys import stdin
 import sys
-from collections import deque
 
-user_count, relation_count = map(int, stdin.readline().split())
-GRAPH = [[] for _ in range(user_count+1)]
-RELATION = [[0] * (user_count+1) for _ in range(user_count+1)]
-for i in range(relation_count):
-    man1, man2 = map(int, stdin.readline().split())
-    GRAPH[man1].append(man2)
-    GRAPH[man2].append(man1)
+row_count, column_count = map(int, stdin.readline().split())
+dest_x = column_count - 1
+dest_y = row_count - 1
+PUZZLE = []
+for i in range(row_count):
+    PUZZLE.append(list(map(int, stdin.readline().rstrip())))
 
-def BFS(root):
-    q = deque()
-    q.append(root)
-    Visited[root] = 1
-    while q:
-        node = q.popleft()
-        for a in GRAPH[node]:
-            if Visited[a] == 0:
-                # 단계가 증가될때마다 관계지수 증가
-                Visited[a] = Visited[node] + 1
-                q.append(a)
+def DFS(y, x, pass_count):
+    global min_count
+    global dest_x, dest_y
+    if (x < 0) or (y < 0) or (x > dest_x) or (y > dest_y):
+        return
+    if (Visited[y][x] == 1) or (PUZZLE[y][x] == 0):
+        return
+    print("DEF",y,x, pass_count)
+    Visited[y][x] = 1
+    if (y == dest_y) and (x == dest_x):
+        print("--> min",y,x, pass_count)
+        min_count = min(min_count, pass_count)
+        return
+    
+    DFS(y-1, x, pass_count+1)
+    DFS(y+1, x, pass_count+1)
+    DFS(y, x+1, pass_count+1)
+    DFS(y, x-1, pass_count+1)
 
-
-result = []
-for i in range(1, user_count+1):
-    Visited = [0] * (user_count+1)
-    BFS(i)
-    result.append(sum(Visited))
-
-min_index = result.index(min(result))
-print(min_index+1)
+min_count = 10e9
+Visited = [[0] * column_count for _ in range(row_count)]
+DFS(0,0, 1)
+print(min_count)
