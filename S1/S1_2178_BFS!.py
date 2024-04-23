@@ -24,7 +24,7 @@ def BFS():
                 continue
             if GRAPH[ny][nx] == 1:
                 q.append((nx, ny))
-                GRAPH[ny][nx] = GRAPH[y][x] + 1
+                GRAPH[ny][nx] = GRAPH[y][x] + 1 # 그래프 배열을 재사용!!
     return GRAPH[row_count-1][column_count-1]
 
 val = BFS()
