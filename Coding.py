@@ -1,26 +1,43 @@
-# S1-11403 경로찾기
+# S1-14940 쉬운최단거리
 from collections import deque
 
-N = int(input())
-GRAPH = []
-for _ in range(N):
-    GRAPH.append(list(map(int, input().split())))
+N, M = map(int, input().split())
+MAP = []
+org_y, org_x = 0,0
+for i in range(N):
+    L = list(input().split())
+    if '2' in L:
+        org_y = i
+        org_x = L.index('2')
+    MAP.append(L)
 
-def BFS(v):
+RESULT = [[-1] * M for _ in range(N)]
+
+dx = [-1, 1,  0, 0]
+dy = [ 0, 0, -1, 1]
+def BFS(y, x):
+    global N, M
     q = deque()
-    q.append(v)
+    q.append((y, x, 1))
+    RESULT[y][x] = 0 #목표점
+    Visited[y][x] = 1
     while q:
-        node = q.popleft()
-        for idx, w in enumerate(GRAPH[node]):
-            if w == 1 and Visited[idx] == 0:
-                Visited[idx] = 1
-                q.append(idx)
+        (y2, x2, dist) = q.popleft()
+        for i in range(4):
+            ny = y2 + dy[i]
+            nx = x2 + dx[i]
+            if nx < 0 or ny < 0 or nx >= M or ny >= N or Visited[ny][nx] == 1:
+                continue
+            Visited[ny][nx] = 1
+            if MAP[ny][nx] == '0':
+                RESULT[ny][nx] = 0 # 갈수없는땅
+                continue
+            if MAP[ny][nx] == '1': # 갈수있는길
+                RESULT[ny][nx] = dist
+                q.append((ny,nx, dist+1))
 
-RESULT = []
-for v in range(N):
-    Visited = [0] * N
-    BFS(v)
-    RESULT.append(Visited)
+Visited = [[0] * M for _ in range(N)]
+BFS(org_y, org_x) # 주의 - 한번호출로 완전탐색 가능!!
 
 for i in range(N):
     print(*RESULT[i])
